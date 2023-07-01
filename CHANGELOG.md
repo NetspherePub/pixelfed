@@ -2,11 +2,25 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.11.8...dev)
 
+### Added
+- Import from Instagram ([#4466](https://github.com/pixelfed/pixelfed/pull/4466)) ([cf3078c5](https://github.com/pixelfed/pixelfed/commit/cf3078c5))
+
 ### Updates
 - Update Notifications.vue component, fix filtering logic to prevent endless spinner ([3df9b53f](https://github.com/pixelfed/pixelfed/commit/3df9b53f))
 - Update Direct Messages, fix api endpoint ([fe8728c0](https://github.com/pixelfed/pixelfed/commit/fe8728c0))
 - Update nginx config ([fbdc6358](https://github.com/pixelfed/pixelfed/commit/fbdc6358))
 - Update api routes, add DeprecatedEndpoint middleware. For more info, visit [pixelfed.org/kb/10404](https://pixelfed.org/kb/10404) ([a8453e77](https://github.com/pixelfed/pixelfed/commit/a8453e77))
+- Update admin dashboard, improve users section ([36b6bf48](https://github.com/pixelfed/pixelfed/commit/36b6bf48))
+- Update AdminApiController, add instance stats endpoint ([89c3710d](https://github.com/pixelfed/pixelfed/commit/89c3710d))
+- Update config, re-add `PF_MAX_USERS` .env variable to limit max users to 1000 by default ([a6d10f03](https://github.com/pixelfed/pixelfed/commit/a6d10f03))
+- Update AdminApiController, fix stats ([5c5541fc](https://github.com/pixelfed/pixelfed/commit/5c5541fc))
+- Update AdminApiController, include more data for getUser method ([4f850e54](https://github.com/pixelfed/pixelfed/commit/4f850e54))
+- Update AdminApiController, improve admin moderation tools ([763ce19a](https://github.com/pixelfed/pixelfed/commit/763ce19a))
+- Update ActivityPubFetchService, fix authorized_fetch compatibility. Closes #1850, #2713, #2935 ([63a7879c](https://github.com/pixelfed/pixelfed/commit/63a7879c))
+- Update IG Import commands, fix stalled import queue ([b18f3fba](https://github.com/pixelfed/pixelfed/commit/b18f3fba))
+- Update TransformImports command, improve handling of imported posts that already exist or are from deleted accounts ([892907d5](https://github.com/pixelfed/pixelfed/commit/892907d5))
+- Update console kernel, add import upload gc ([afe6948d](https://github.com/pixelfed/pixelfed/commit/afe6948d))
+- Update ImportService, filter deleted posts from getImportedPosts endpoint ([10dd348c](https://github.com/pixelfed/pixelfed/commit/10dd348c))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.11.8 (2023-05-29)](https://github.com/pixelfed/pixelfed/compare/v0.11.7...v0.11.8)
