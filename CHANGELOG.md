@@ -2,7 +2,17 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.11.9...dev)
 
-## [v0.11.9 (2023-08-06)](https://github.com/pixelfed/pixelfed/compare/v0.11.8...v0.11.9)
+### Federation
+- Update Privacy Settings, add support for Mastodon `indexable` search flag ([fc24630e](https://github.com/pixelfed/pixelfed/commit/fc24630e))
+- Update AP Helpers, consume actor `indexable` attribute ([fbdcdd9d](https://github.com/pixelfed/pixelfed/commit/fbdcdd9d))
+-  ([](https://github.com/pixelfed/pixelfed/commit/))
+
+### Updates
+- Update FollowerService, add forget method to RelationshipService call to reduce load when mass purging ([347e4f59](https://github.com/pixelfed/pixelfed/commit/347e4f59))
+- Update FollowServiceWarmCache, improve handling larger following/follower lists ([61a6d904](https://github.com/pixelfed/pixelfed/commit/61a6d904))
+-  ([](https://github.com/pixelfed/pixelfed/commit/))
+
+## [v0.11.9 (2023-08-21)](https://github.com/pixelfed/pixelfed/compare/v0.11.8...v0.11.9)
 
 ### Added
 - Import from Instagram ([#4466](https://github.com/pixelfed/pixelfed/pull/4466)) ([cf3078c5](https://github.com/pixelfed/pixelfed/commit/cf3078c5))
@@ -57,8 +67,7 @@
 - Update RemoteStatusDelete pipeline ([71e92261](https://github.com/pixelfed/pixelfed/commit/71e92261))
 - Update RemoteStatusDelete pipeline ([fab8f25e](https://github.com/pixelfed/pixelfed/commit/fab8f25e))
 - Update RemoteStatusPipeline, fix reply check ([618b6727](https://github.com/pixelfed/pixelfed/commit/618b6727))
--  ([](https://github.com/pixelfed/pixelfed/commit/))
--  ([](https://github.com/pixelfed/pixelfed/commit/))
+- Update ApiV1Controller, add bookmarked to timeline entities ([ca746717](https://github.com/pixelfed/pixelfed/commit/ca746717))
 
 ## [v0.11.8 (2023-05-29)](https://github.com/pixelfed/pixelfed/compare/v0.11.7...v0.11.8)
 
