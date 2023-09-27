@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.11.9...dev)
 
+### Added
+- Resilient Media Storage ([#4665](https://github.com/pixelfed/pixelfed/pull/4665)) ([fb1deb6](https://github.com/pixelfed/pixelfed/commit/fb1deb6))
+
 ### Federation
 - Update Privacy Settings, add support for Mastodon `indexable` search flag ([fc24630e](https://github.com/pixelfed/pixelfed/commit/fc24630e))
 - Update AP Helpers, consume actor `indexable` attribute ([fbdcdd9d](https://github.com/pixelfed/pixelfed/commit/fbdcdd9d))
@@ -14,6 +17,12 @@
 - Update NotificationService, improve cache warming query ([2496386d](https://github.com/pixelfed/pixelfed/commit/2496386d))
 - Update StatusService, hydrate accounts on request instead of caching them along with status objects ([223661ec](https://github.com/pixelfed/pixelfed/commit/223661ec))
 - Update profile embed, fix resize ([dc23c21d](https://github.com/pixelfed/pixelfed/commit/dc23c21d))
+- Update Status model, improve thumb logic ([d969a973](https://github.com/pixelfed/pixelfed/commit/d969a973))
+- Update Status model, allow unlisted thumbnails ([1f0a45b7](https://github.com/pixelfed/pixelfed/commit/1f0a45b7))
+- Update StatusTagsPipeline, fix object tags and slug normalization ([d295e605](https://github.com/pixelfed/pixelfed/commit/d295e605))
+- Update Note and CreateNote transformers, include attachment blurhash, width and height ([ce1afe27](https://github.com/pixelfed/pixelfed/commit/ce1afe27))
+- Update ap helpers, store media attachment width and height if present ([8c969191](https://github.com/pixelfed/pixelfed/commit/8c969191))
+- Update Sign-in with Mastodon, allow usage when registrations are closed ([895dc4fa](https://github.com/pixelfed/pixelfed/commit/895dc4fa))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.11.9 (2023-08-21)](https://github.com/pixelfed/pixelfed/compare/v0.11.8...v0.11.9)
