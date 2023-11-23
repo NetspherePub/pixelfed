@@ -9,6 +9,8 @@
 - Added `avatar:storage-deep-clean` command to dispatch remote avatar storage cleanup jobs ([c37b7cde](https://github.com/pixelfed/pixelfed/commit/c37b7cde))
 - Added S3 command to rewrite media urls ([5b3a5610](https://github.com/pixelfed/pixelfed/commit/5b3a5610))
 - Experimental home feed ([#4752](https://github.com/pixelfed/pixelfed/pull/4752)) ([c39b9afb](https://github.com/pixelfed/pixelfed/commit/c39b9afb))
+- Added `app:hashtag-cached-count-update` command to update cached_count of hashtags and add to scheduler to run every 25 minutes past the hour ([1e31fee6](https://github.com/pixelfed/pixelfed/commit/1e31fee6))
+- Added `app:hashtag-related-generate` command to generate related hashtags ([176b4ed7](https://github.com/pixelfed/pixelfed/commit/176b4ed7))
 
 ### Federation
 - Update Privacy Settings, add support for Mastodon `indexable` search flag ([fc24630e](https://github.com/pixelfed/pixelfed/commit/fc24630e))
@@ -51,6 +53,14 @@
 - Update mail config ([0e431271](https://github.com/pixelfed/pixelfed/commit/0e431271))
 - Update hashtag following ([015b1b80](https://github.com/pixelfed/pixelfed/commit/015b1b80))
 - Update IncrementPostCount job, prevent overlap ([b2c9cc23](https://github.com/pixelfed/pixelfed/commit/b2c9cc23))
+- Update HashtagFollowService, fix cache invalidation bug ([84f4e885](https://github.com/pixelfed/pixelfed/commit/84f4e885))
+- Update Experimental Home Feed, fix remote posts, shares and reblogs ([c6a6b3ae](https://github.com/pixelfed/pixelfed/commit/c6a6b3ae))
+- Update HashtagService, improve count perf ([3327a008](https://github.com/pixelfed/pixelfed/commit/3327a008))
+- Update StatusHashtagService, remove problematic cache layer ([e5401f85](https://github.com/pixelfed/pixelfed/commit/e5401f85))
+- Update HomeFeedPipeline, fix tag filtering ([f105f4e8](https://github.com/pixelfed/pixelfed/commit/f105f4e8))
+- Update HashtagService, reduce cached_count cache ttl ([15f29f7d](https://github.com/pixelfed/pixelfed/commit/15f29f7d))
+- Update ApiV1Controller, fix include_reblogs param on timelines/home endpoint, and improve limit pagination logic ([287f903b](https://github.com/pixelfed/pixelfed/commit/287f903b))
+- Update StoryApiV1Controller, add self-carousel endpoint. Fixes ([#4352](https://github.com/pixelfed/pixelfed/issues/4352)) ([bcb88d5b](https://github.com/pixelfed/pixelfed/commit/bcb88d5b))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.11.9 (2023-08-21)](https://github.com/pixelfed/pixelfed/compare/v0.11.8...v0.11.9)

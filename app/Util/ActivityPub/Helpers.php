@@ -35,6 +35,7 @@ use App\Services\MediaStorageService;
 use App\Services\NetworkTimelineService;
 use App\Jobs\MediaPipeline\MediaStoragePipeline;
 use App\Jobs\AvatarPipeline\RemoteAvatarFetch;
+use App\Jobs\HomeFeedPipeline\FeedInsertRemotePipeline;
 use App\Util\Media\License;
 use App\Models\Poll;
 use Illuminate\Contracts\Cache\LockTimeoutException;
@@ -536,6 +537,12 @@ class Helpers {
         }
 
         IncrementPostCount::dispatch($pid)->onQueue('low');
+
+        if( $status->in_reply_to_id === null &&
+            in_array($status->type, ['photo', 'photo:album', 'video', 'video:album', 'photo:video:album'])
+        ) {
+            FeedInsertRemotePipeline::dispatch($status->id, $pid)->onQueue('feed');
+        }
 
         return $status;
     }

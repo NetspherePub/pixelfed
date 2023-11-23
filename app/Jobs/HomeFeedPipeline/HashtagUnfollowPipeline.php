@@ -18,12 +18,13 @@ use App\Services\HashtagFollowService;
 use App\Services\StatusService;
 use App\Services\HomeTimelineService;
 
-class HashtagUnfollowPipeline implements ShouldQueue, ShouldBeUniqueUntilProcessing
+class HashtagUnfollowPipeline implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $pid;
     protected $hid;
+    protected $slug;
 
     public $timeout = 900;
     public $tries = 3;
@@ -31,37 +32,13 @@ class HashtagUnfollowPipeline implements ShouldQueue, ShouldBeUniqueUntilProcess
     public $failOnTimeout = true;
 
     /**
-     * The number of seconds after which the job's unique lock will be released.
-     *
-     * @var int
-     */
-    public $uniqueFor = 3600;
-
-    /**
-     * Get the unique ID for the job.
-     */
-    public function uniqueId(): string
-    {
-        return 'hfp:hashtag:unfollow:' . $this->hid . ':' . $this->pid;
-    }
-
-    /**
-     * Get the middleware the job should pass through.
-     *
-     * @return array<int, object>
-     */
-    public function middleware(): array
-    {
-        return [(new WithoutOverlapping("hfp:hashtag:unfollow:{$this->hid}:{$this->pid}"))->shared()->dontRelease()];
-    }
-
-    /**
      * Create a new job instance.
      */
-    public function __construct($hid, $pid)
+    public function __construct($hid, $pid, $slug)
     {
         $this->hid = $hid;
         $this->pid = $pid;
+        $this->slug = $slug;
     }
 
     /**
@@ -71,12 +48,9 @@ class HashtagUnfollowPipeline implements ShouldQueue, ShouldBeUniqueUntilProcess
     {
         $hid = $this->hid;
         $pid = $this->pid;
+        $slug = strtolower($this->slug);
 
         $statusIds = HomeTimelineService::get($pid, 0, -1);
-
-        if(!$statusIds || !count($statusIds)) {
-            return;
-        }
 
         $followingIds = Cache::remember('profile:following:'.$pid, 1209600, function() use($pid) {
             $following = Follower::whereProfileId($pid)->pluck('following_id');
@@ -85,11 +59,20 @@ class HashtagUnfollowPipeline implements ShouldQueue, ShouldBeUniqueUntilProcess
 
         foreach($statusIds as $id) {
             $status = StatusService::get($id, false);
-            if(!$status) {
+            if(!$status || empty($status['tags'])) {
                 HomeTimelineService::rem($pid, $id);
                 continue;
             }
-            if(!in_array($status['account']['id'], $followingIds)) {
+            $following = in_array((int) $status['account']['id'], $followingIds);
+            if($following === true) {
+                continue;
+            }
+
+            $tags = collect($status['tags'])->map(function($tag) {
+                return strtolower($tag['name']);
+            })->filter()->values()->toArray();
+
+            if(in_array($slug, $tags)) {
                 HomeTimelineService::rem($pid, $id);
             }
         }
