@@ -69,7 +69,7 @@ class FeedInsertPipeline implements ShouldQueue, ShouldBeUniqueUntilProcessing
         $sid = $this->sid;
         $status = StatusService::get($sid, false);
 
-        if(!$status) {
+        if(!$status || !isset($status['account']) || !isset($status['account']['id'])) {
             return;
         }
 
@@ -78,7 +78,6 @@ class FeedInsertPipeline implements ShouldQueue, ShouldBeUniqueUntilProcessing
         }
 
         HomeTimelineService::add($this->pid, $this->sid);
-
 
         $ids = FollowerService::localFollowerIds($this->pid);
 

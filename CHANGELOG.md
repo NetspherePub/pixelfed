@@ -11,6 +11,7 @@
 - Experimental home feed ([#4752](https://github.com/pixelfed/pixelfed/pull/4752)) ([c39b9afb](https://github.com/pixelfed/pixelfed/commit/c39b9afb))
 - Added `app:hashtag-cached-count-update` command to update cached_count of hashtags and add to scheduler to run every 25 minutes past the hour ([1e31fee6](https://github.com/pixelfed/pixelfed/commit/1e31fee6))
 - Added `app:hashtag-related-generate` command to generate related hashtags ([176b4ed7](https://github.com/pixelfed/pixelfed/commit/176b4ed7))
+- Added Mutual Followers API endpoint ([33dbbe46](https://github.com/pixelfed/pixelfed/commit/33dbbe46))
 
 ### Federation
 - Update Privacy Settings, add support for Mastodon `indexable` search flag ([fc24630e](https://github.com/pixelfed/pixelfed/commit/fc24630e))
@@ -63,6 +64,20 @@
 - Update StoryApiV1Controller, add self-carousel endpoint. Fixes ([#4352](https://github.com/pixelfed/pixelfed/issues/4352)) ([bcb88d5b](https://github.com/pixelfed/pixelfed/commit/bcb88d5b))
 - Update FollowServiceWarmCache, use more efficient query ([fe9b4c5a](https://github.com/pixelfed/pixelfed/commit/fe9b4c5a))
 - Update HomeFeedPipeline, observe mutes/blocks during fanout ([8548294c](https://github.com/pixelfed/pixelfed/commit/8548294c))
+- Update FederationController, add proper following/follower counts ([3204fb96](https://github.com/pixelfed/pixelfed/commit/3204fb96))
+- Update FederationController, add proper statuses counts ([3204fb96](https://github.com/pixelfed/pixelfed/commit/3204fb96))
+- Update Inbox handler, fix missing object_url and uri fields for direct statuses ([a0157fce](https://github.com/pixelfed/pixelfed/commit/a0157fce))
+- Update DirectMessageController, deliver direct delete activities to user inbox instead of sharedInbox ([d848792a](https://github.com/pixelfed/pixelfed/commit/d848792a))
+- Update DirectMessageController, dispatch deliver and delete actions to the job queue ([7f462a80](https://github.com/pixelfed/pixelfed/commit/7f462a80))
+- Update Inbox, improve story attribute collection ([06bee36c](https://github.com/pixelfed/pixelfed/commit/06bee36c))
+- Update DirectMessageController, dispatch local deletes to pipeline ([98186564](https://github.com/pixelfed/pixelfed/commit/98186564))
+- Update StatusPipeline, fix Direct and Story notification deletion ([4c95306f](https://github.com/pixelfed/pixelfed/commit/4c95306f))
+- Update Notifications.vue, fix deprecated DM action links for story activities ([4c3823b0](https://github.com/pixelfed/pixelfed/commit/4c3823b0))
+- Update ComposeModal, fix missing alttext post state ([0a068119](https://github.com/pixelfed/pixelfed/commit/0a068119))
+- Update PhotoAlbumPresenter.vue, fix fullscreen mode ([822e9888](https://github.com/pixelfed/pixelfed/commit/822e9888))
+- Update Timeline.vue, improve CHT pagination ([9c43e7e2](https://github.com/pixelfed/pixelfed/commit/9c43e7e2))
+- Update HomeFeedPipeline, fix StatusService validation ([041c0135](https://github.com/pixelfed/pixelfed/commit/041c0135))
+- Update Inbox, improve tombstone query efficiency ([759a4393](https://github.com/pixelfed/pixelfed/commit/759a4393))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.11.9 (2023-08-21)](https://github.com/pixelfed/pixelfed/compare/v0.11.8...v0.11.9)
