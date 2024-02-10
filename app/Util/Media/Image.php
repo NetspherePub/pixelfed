@@ -37,16 +37,16 @@ class Image
 	{
 		return [
 			'square' => [
-				'width'  => 1080,
-				'height' => 1080,
+				'width'  => 2160,
+				'height' => 2160,
 			],
 			'landscape' => [
-				'width'  => 1920,
-				'height' => 1080,
+				'width'  => 3840,
+				'height' => 2160,
 			],
 			'portrait' => [
-				'width'  => 1080,
-				'height' => 1350,
+				'width'  => 2160,
+				'height' => 2700,
 			],
 		];
 	}
