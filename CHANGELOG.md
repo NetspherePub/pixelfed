@@ -2,10 +2,33 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.12.1...dev)
 
+### Added
+- New api/v1/instance/peers API endpoint, disabled by default ([4aad1c22](https://github.com/pixelfed/pixelfed/commit/4aad1c22))
+- Added disable_embeds setting, and fix cache invalidation in other settings ([c5e7e917](https://github.com/pixelfed/pixelfed/commit/c5e7e917))
+
 ### Updates
 - Update DirectMessageController, add 72 hour delay for new accounts before they can send a DM ([61d105fd](https://github.com/pixelfed/pixelfed/commit/61d105fd))
 - Update AdminCuratedRegisterController, increase message length from 1000 to 3000 ([9a5e3471](https://github.com/pixelfed/pixelfed/commit/9a5e3471))
 - Update ApiV1Controller, add pe (pixelfed entity) support to /api/v1/statuses/{id}/context endpoint ([d645d6ca](https://github.com/pixelfed/pixelfed/commit/d645d6ca))
+- Update Admin Curated Onboarding, add select-all/mass action operations ([b22cac94](https://github.com/pixelfed/pixelfed/commit/b22cac94))
+- Update AdminCuratedRegisterController, fix existing account approval ([cbb96cfd](https://github.com/pixelfed/pixelfed/commit/cbb96cfd))
+- Update ActivityPubFetchService, fix Friendica bug ([e4edc6f1](https://github.com/pixelfed/pixelfed/commit/e4edc6f1))
+- Update ProfileController, fix atom feed cache ttl. Fixes #5093 ([921e2965](https://github.com/pixelfed/pixelfed/commit/921e2965))
+- Update CollectionsController, add new self route ([bc2495c6](https://github.com/pixelfed/pixelfed/commit/bc2495c6))
+- Update FederationController, add webfinger support for actor uri. Fixes #5068 ([24194f7d](https://github.com/pixelfed/pixelfed/commit/24194f7d))
+- Update FetchNodeinfoPipeline, set last_fetched_at timestamp ([a7fce91e](https://github.com/pixelfed/pixelfed/commit/a7fce91e))
+- Update task scheduler, add weekly instance scan to check nodeinfo for known instances ([dc6b9f46](https://github.com/pixelfed/pixelfed/commit/dc6b9f46))
+- Update AP fetch service and domain service ([42915ff9](https://github.com/pixelfed/pixelfed/commit/42915ff9))
+- Update ApiV1Controller, add settings to verify_credentials endpoint ([3f4e0b94](https://github.com/pixelfed/pixelfed/commit/3f4e0b94))
+- Update ApiV1Controller, fix update_credentials boolean handling ([19c62aaa](https://github.com/pixelfed/pixelfed/commit/19c62aaa))
+- Update ApiV1Controller, fix cache invalidation bug in update_credentials ([d56a4108](https://github.com/pixelfed/pixelfed/commit/d56a4108))
+- Update ApiV1Controller, fix self relationship response ([28bc7aa4](https://github.com/pixelfed/pixelfed/commit/28bc7aa4))
+- Update ApiController, add pe support to like/unlike endpoints ([679ef677](https://github.com/pixelfed/pixelfed/commit/679ef677))
+- Update ApiV1Dot1Controller, fix username to id endpoint ([4d6cea9a](https://github.com/pixelfed/pixelfed/commit/4d6cea9a))
+- Update StatusController, cache AP object ([a75b89b2](https://github.com/pixelfed/pixelfed/commit/a75b89b2))
+- Update status embed, add support for album carousels ([f4898db9](https://github.com/pixelfed/pixelfed/commit/f4898db9))
+- Update profile embeds, add support for albums ([4fd156c4](https://github.com/pixelfed/pixelfed/commit/4fd156c4))
+-  ([](https://github.com/pixelfed/pixelfed/commit/))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.12.1 (2024-05-07)](https://github.com/pixelfed/pixelfed/compare/v0.12.0...v0.12.1)
