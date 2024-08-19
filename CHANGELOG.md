@@ -2,13 +2,21 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.12.3...dev)
 
+### Added
+- Implement Admin Domain Blocks API (Mastodon API Compatible) [ThisIsMissEm](https://github.com/ThisIsMissEm) ([#5021](https://github.com/pixelfed/pixelfed/pull/5021))
+- Authorize Interaction support (for handling remote interactions) ([4ca7c6c3](https://github.com/pixelfed/pixelfed/commit/4ca7c6c3))
+
 ### Updates
 - Update ApiV1Controller, add support for notification filter types ([f61159a1](https://github.com/pixelfed/pixelfed/commit/f61159a1))
 - Update ApiV1Dot1Controller, fix mutual api ([a8bb97b2](https://github.com/pixelfed/pixelfed/commit/a8bb97b2))
 - Update ApiV1Controller, fix /api/v1/favourits pagination ([72f68160](https://github.com/pixelfed/pixelfed/commit/72f68160))
 - Update RegisterController, update username constraints, require atleast one alpha char ([dd6e3cc2](https://github.com/pixelfed/pixelfed/commit/dd6e3cc2))
 - Update AdminUser, fix entity casting ([cb5620d4](https://github.com/pixelfed/pixelfed/commit/cb5620d4))
--  ([](https://github.com/pixelfed/pixelfed/commit/))
+- Update instance config, update network cache feed max_hours_old falloff to 90 days instead of 6 hours to allow for less active instances to have more results ([c042d135](https://github.com/pixelfed/pixelfed/commit/c042d135))
+- Update ApiV1Dot1Controller, add new single media status create endpoint ([b03f5cec](https://github.com/pixelfed/pixelfed/commit/b03f5cec))
+- Update AdminSettings component, add link to Custom CSS settings ([958daac4](https://github.com/pixelfed/pixelfed/commit/958daac4))
+- Update ApiV1Controller, fix v1/instance stats, force cast to int ([dcd95d68](https://github.com/pixelfed/pixelfed/commit/dcd95d68))
+- Update BeagleService, disable discovery if AP is disabled ([6cd1cbb4](https://github.com/pixelfed/pixelfed/commit/6cd1cbb4))
 -  ([](https://github.com/pixelfed/pixelfed/commit/))
 
 ## [v0.12.3 (2024-07-01)](https://github.com/pixelfed/pixelfed/compare/v0.12.2...v0.12.3)
