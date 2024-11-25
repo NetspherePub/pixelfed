@@ -9,6 +9,7 @@ use App\Jobs\MediaPipeline\MediaStoragePipeline;
 use App\Jobs\StatusPipeline\StatusReplyPipeline;
 use App\Jobs\StatusPipeline\StatusTagsPipeline;
 use App\Media;
+use App\Models\ModeratedProfile;
 use App\Models\Poll;
 use App\Profile;
 use App\Services\Account\AccountStatService;
@@ -297,6 +298,22 @@ class Helpers
         return null;
     }
 
+    public static function validateTimestamp($timestamp)
+    {
+        try {
+            $date = Carbon::parse($timestamp);
+            $now = Carbon::now();
+            $tenYearsAgo = $now->copy()->subYears(10);
+            $isMoreThanTenYearsOld = $date->lt($tenYearsAgo);
+            $tomorrow = $now->copy()->addDay();
+            $isMoreThanOneDayFuture = $date->gt($tomorrow);
+
+            return ! ($isMoreThanTenYearsOld || $isMoreThanOneDayFuture);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
     public static function statusFirstOrFetch($url, $replyTo = false)
     {
         $url = self::validateUrl($url);
@@ -325,6 +342,10 @@ class Helpers
         $res = self::fetchFromUrl($url);
 
         if (! $res || empty($res) || isset($res['error']) || ! isset($res['@context']) || ! isset($res['published'])) {
+            return;
+        }
+
+        if (! self::validateTimestamp($res['published'])) {
             return;
         }
 
@@ -531,7 +552,6 @@ class Helpers
                 'url' => $url,
                 'object_url' => $id,
                 'caption' => isset($activity['content']) ? Purify::clean(strip_tags($activity['content'])) : null,
-                'rendered' => isset($activity['content']) ? Purify::clean($activity['content']) : null,
                 'created_at' => Carbon::parse($ts)->tz('UTC'),
                 'in_reply_to_id' => $reply_to,
                 'local' => false,
@@ -673,8 +693,7 @@ class Helpers
         $status->url = isset($res['url']) ? $res['url'] : $url;
         $status->uri = isset($res['url']) ? $res['url'] : $url;
         $status->object_url = $id;
-        $status->caption = strip_tags($res['content']);
-        $status->rendered = Purify::clean($res['content']);
+        $status->caption = strip_tags(Purify::clean($res['content']));
         $status->created_at = Carbon::parse($ts)->tz('UTC');
         $status->in_reply_to_id = null;
         $status->local = false;
@@ -814,6 +833,11 @@ class Helpers
         if (! self::validateUrl($res['id'])) {
             return;
         }
+
+        if (ModeratedProfile::whereProfileUrl($res['id'])->whereIsBanned(true)->exists()) {
+            return;
+        }
+
         $urlDomain = parse_url($url, PHP_URL_HOST);
         $domain = parse_url($res['id'], PHP_URL_HOST);
         if (strtolower($urlDomain) !== strtolower($domain)) {

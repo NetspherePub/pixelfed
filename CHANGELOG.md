@@ -2,11 +2,23 @@
 
 ## [Unreleased](https://github.com/pixelfed/pixelfed/compare/v0.12.3...dev)
 
+### Updates
+- Update AP helpers, reject statuses with invalid dates ([960f3849](https://github.com/pixelfed/pixelfed/commit/960f3849))
+- Update DirectMessage API, fix broken threading ([044d410c](https://github.com/pixelfed/pixelfed/commit/044d410c))
+- Update Status caption render logic ([fb8dbb95](https://github.com/pixelfed/pixelfed/commit/fb8dbb95))
+- Update ApiV1Controller, fix bookmark bug. Closes #5216 ([9f7cc52c](https://github.com/pixelfed/pixelfed/commit/9f7cc52c))
+- Update Status caption logic, stop storing duplicate html caption in db and defer to cached StatusService rendering ([9eeb7b67](https://github.com/pixelfed/pixelfed/commit/9eeb7b67))
+- Update AutolinkService, optimize lookups ([eac2c196](https://github.com/pixelfed/pixelfed/commit/eac2c196))
+-  ([](https://github.com/pixelfed/pixelfed/commit/))
+
+## [v0.12.4 (2024-11-08)](https://github.com/pixelfed/pixelfed/compare/v0.12.4...dev)
+
 ### Added
 - Implement Admin Domain Blocks API (Mastodon API Compatible) [ThisIsMissEm](https://github.com/ThisIsMissEm) ([#5021](https://github.com/pixelfed/pixelfed/pull/5021))
 - Authorize Interaction support (for handling remote interactions) ([4ca7c6c3](https://github.com/pixelfed/pixelfed/commit/4ca7c6c3))
 - Contact Form Admin Responses ([52cc6090](https://github.com/pixelfed/pixelfed/commit/52cc6090))
 - Profile Carousels ([8af77a3f](https://github.com/pixelfed/pixelfed/commit/8af77a3f))
+- Moderated Profiles ([39f16321](https://github.com/pixelfed/pixelfed/commit/39f16321))
 
 ### Federation
 - Add ActiveSharedInboxService, for efficient sharedInbox caching ([1a6a3397](https://github.com/pixelfed/pixelfed/commit/1a6a3397))
@@ -34,7 +46,8 @@
 - Update ReblogService, fix cache sync issues ([3de8ceca](https://github.com/pixelfed/pixelfed/commit/3de8ceca))
 - Update config, allow Beagle discover service to be disabled ([de4ce3c8](https://github.com/pixelfed/pixelfed/commit/de4ce3c8))
 - Update ApiV1Dot1Controller, allow upto 5 similar push tokens ([7820b506](https://github.com/pixelfed/pixelfed/commit/7820b506))
--  ([](https://github.com/pixelfed/pixelfed/commit/))
+- Update AdminReports, add missing click handler. Fixes #5332 ([fe48b8ad](https://github.com/pixelfed/pixelfed/commit/fe48b8ad))
+- Improve media filtering by using OffscreenCanvas, if supported ([aea5392](https://github.com/pixelfed/pixelfed/commit/aea5392))
 
 ## [v0.12.3 (2024-07-01)](https://github.com/pixelfed/pixelfed/compare/v0.12.2...v0.12.3)
 
