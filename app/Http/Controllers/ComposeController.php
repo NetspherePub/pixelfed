@@ -30,6 +30,7 @@ use App\Util\Media\License;
 use Auth;
 use Cache;
 use DB;
+use Purify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use League\Fractal;
@@ -569,7 +570,9 @@ class ComposeController extends Controller
             $status->cw_summary = $request->input('spoiler_text');
         }
 
-        $status->caption = strip_tags($request->caption);
+        $defaultCaption = "";
+        $status->caption = strip_tags($request->input('caption')) ?? $defaultCaption;
+        $status->rendered = $defaultCaption;
         $status->scope = 'draft';
         $status->visibility = 'draft';
         $status->profile_id = $profile->id;
@@ -673,6 +676,7 @@ class ComposeController extends Controller
         $place = $request->input('place');
         $cw = $request->input('cw');
         $tagged = $request->input('tagged');
+        $defaultCaption = config_cache('database.default') === 'mysql' ? null : "";
 
         if ($place && is_array($place)) {
             $status->place_id = $place['id'];
@@ -682,7 +686,8 @@ class ComposeController extends Controller
             $status->comments_disabled = (bool) $request->input('comments_disabled');
         }
 
-        $status->caption = strip_tags($request->caption);
+        $status->caption = $request->filled('caption') ? strip_tags($request->caption) : $defaultCaption;
+        $status->rendered = $defaultCaption;
         $status->profile_id = $profile->id;
         $entities = [];
         $visibility = $profile->unlisted == true && $visibility == 'public' ? 'unlisted' : $visibility;

@@ -137,7 +137,10 @@ class ApiV1Controller extends Controller
             'redirect_uris' => 'required',
         ]);
 
-        $uris = implode(',', explode('\n', $request->redirect_uris));
+        $uris = collect(explode("\n", $request->redirect_uris))
+            ->map('urldecode')
+            ->filter()
+            ->join(',');
 
         $client = Passport::client()->forceFill([
             'user_id' => null,
@@ -1426,6 +1429,8 @@ class ApiV1Controller extends Controller
 
         $status['favourited'] = true;
         $status['favourites_count'] = $status['favourites_count'] + 1;
+        $status['bookmarked'] = BookmarkService::get($user->profile_id, $status['id']);
+        $status['reblogged'] = ReblogService::get($user->profile_id, $status['id']);
 
         return $this->json($status);
     }
@@ -1484,6 +1489,8 @@ class ApiV1Controller extends Controller
 
         $status['favourited'] = false;
         $status['favourites_count'] = isset($ogStatus) ? $ogStatus->likes_count : $status['favourites_count'] - 1;
+        $status['bookmarked'] = BookmarkService::get($user->profile_id, $status['id']);
+        $status['reblogged'] = ReblogService::get($user->profile_id, $status['id']);
 
         return $this->json($status);
     }
@@ -3490,7 +3497,8 @@ class ApiV1Controller extends Controller
             return [];
         }
 
-        $content = $request->filled('status') ? strip_tags(Purify::clean($request->input('status'))) : null;
+        $defaultCaption = "";
+        $content = $request->filled('status') ? strip_tags($request->input('status')) : $defaultCaption;
         $cw = $user->profile->cw == true ? true : $request->boolean('sensitive', false);
         $spoilerText = $cw && $request->filled('spoiler_text') ? $request->input('spoiler_text') : null;
 
@@ -3504,6 +3512,7 @@ class ApiV1Controller extends Controller
 
             $status = new Status;
             $status->caption = $content;
+            $status->rendered = $defaultCaption;
             $status->scope = $visibility;
             $status->visibility = $visibility;
             $status->profile_id = $user->profile_id;
@@ -3528,6 +3537,7 @@ class ApiV1Controller extends Controller
             if (! $in_reply_to_id) {
                 $status = new Status;
                 $status->caption = $content;
+                $status->rendered = $defaultCaption;
                 $status->profile_id = $user->profile_id;
                 $status->is_nsfw = $cw;
                 $status->cw_summary = $spoilerText;
@@ -3680,7 +3690,10 @@ class ApiV1Controller extends Controller
             }
         }
 
+        $defaultCaption = config_cache('database.default') === 'mysql' ? null : '';
         $share = Status::firstOrCreate([
+            'caption' => $defaultCaption,
+            'rendered' => $defaultCaption,
             'profile_id' => $user->profile_id,
             'reblog_of_id' => $status->id,
             'type' => 'share',
@@ -3695,6 +3708,8 @@ class ApiV1Controller extends Controller
         ReblogService::add($user->profile_id, $status->id);
         $res = StatusService::getMastodon($status->id);
         $res['reblogged'] = true;
+        $res['favourited'] = LikeService::liked($user->profile_id, $status->id);
+        $res['bookmarked'] = BookmarkService::get($user->profile_id, $status->id);
 
         return $this->json($res);
     }
@@ -3741,6 +3756,8 @@ class ApiV1Controller extends Controller
 
         $res = StatusService::getMastodon($status->id);
         $res['reblogged'] = false;
+        $res['favourited'] = LikeService::liked($user->profile_id, $status->id);
+        $res['bookmarked'] = BookmarkService::get($user->profile_id, $status->id);
 
         return $this->json($res);
     }
